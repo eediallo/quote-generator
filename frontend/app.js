@@ -3,11 +3,14 @@
 const generateQuoteBtn = document.querySelector('#generate-quote-btn')
 const quoteEl = document.querySelector('#quote')
 
-const endPoint = 'http://quote-generator-iwnw.onrender.com'
+const endPoint = 'https://quote-generator-iwnw.onrender.com'
 
 async function fetchQuote(){
     try{
-        const resp = await fetch(endPoint)
+        const resp = await fetch(endPoint, {
+            method: 'GET',
+            headers: {'content-type' : 'application/json'}
+        })
         if (!resp.ok) {
             throw new Error(`Failed to fetch quote: ${resp.status}`)
         }
