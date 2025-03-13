@@ -1,7 +1,9 @@
 
 
+const generateQuoteBtn = document.querySelector('#generate-quote-btn')
+const quoteEl = document.querySelector('#quote')
+
 const endPoint = 'http://localhost:3000'
-console.log('hello world')
 
 async function fetchQuote(){
     try{
@@ -18,7 +20,9 @@ async function fetchQuote(){
 
 async function getQuote(){
 const quote = await fetchQuote()
-console.log(quote)
+generateQuoteBtn.addEventListener('click', ()=>{
+    quoteEl.innerHTML = `${quote.quote} - ${quote.author}`
+})
 }
-
 getQuote()
+
