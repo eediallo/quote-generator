@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for elhadj-abdoul-diallo-quote-generator on 2025-03-13T21:26:09Z
+# fly.toml app configuration file generated for elhadj-abdoul-diallo-quote-generator-still-darkness-1788 on 2025-03-13T22:19:13Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'elhadj-abdoul-diallo-quote-generator'
+app = 'elhadj-abdoul-diallo-quote-generator-still-darkness-1788'
 primary_region = 'lhr'
 
 [build]
