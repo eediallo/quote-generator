@@ -1,7 +1,10 @@
 import express from "express";
+import cors from 'express'
 
 const app = express();
 const port = 3000;
+
+app.use(cors())
 
 const quotes = [
   {
@@ -22,8 +25,7 @@ function randomQuote() {
 app.get("/", (req, res) => {
     console.error('Request received from the client.')
   const quote = randomQuote();
-  const quoteString = JSON.stringify(quote);
-  res.json(quoteString);
+  res.json(quote);
 });
 
 app.post("/", (req, res) => {
