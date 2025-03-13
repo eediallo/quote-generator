@@ -23,7 +23,6 @@ function randomQuote() {
 }
 
 app.get("/", (req, res) => {
-    console.error('Request received from the client.')
   const quote = randomQuote();
   res.json(quote);
 });
