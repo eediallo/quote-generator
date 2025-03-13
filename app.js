@@ -18,11 +18,8 @@ async function fetchQuote(){
     }
 }
 
-async function getQuote(){
-const quote = await fetchQuote()
-generateQuoteBtn.addEventListener('click', ()=>{
+generateQuoteBtn.addEventListener('click', async ()=>{
+    const quote = await fetchQuote()
     quoteEl.innerHTML = `${quote.quote} - ${quote.author}`
 })
-}
-getQuote()
 
