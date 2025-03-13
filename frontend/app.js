@@ -3,7 +3,7 @@
 const generateQuoteBtn = document.querySelector('#generate-quote-btn')
 const quoteEl = document.querySelector('#quote')
 
-const endPoint = 'http://localhost:3000'
+const endPoint = 'http://quote-generator-iwnw.onrender.com'
 
 async function fetchQuote(){
     try{
