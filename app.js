@@ -20,6 +20,6 @@ async function fetchQuote(){
 
 generateQuoteBtn.addEventListener('click', async ()=>{
     const quote = await fetchQuote()
-    quoteEl.innerHTML = `${quote.quote} - ${quote.author}`
+    quoteEl.textContent = `${quote.quote} - ${quote.author}`
 })
 
