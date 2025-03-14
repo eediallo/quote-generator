@@ -3,7 +3,7 @@
 const generateQuoteBtn = document.querySelector('#generate-quote-btn')
 const quoteEl = document.querySelector('#quote')
 
-const endPoint = 'https://quote-generator-iwnw.onrender.com'
+const endPoint = 'https://elhadj-abdoul-diallo-quote-generator-still-darkness-1788.fly.dev/'
 
 async function fetchQuote(){
     try{
