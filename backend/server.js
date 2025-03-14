@@ -33,7 +33,6 @@ function randomQuote() {
 }
 
 app.get("/", (req, res) => {
-  console.log('User hit the server')
   res.sendFile(path.resolve(__dirname, "index.html"));
 });
 
