@@ -1,14 +1,21 @@
 import express from "express";
-import cors from 'cors'
+import cors from "cors";
+import path from "path";
+
+const __dirname = new URL("../frontend", import.meta.url).pathname;
+
+// const staticDir = path.join(__dirname, "..", "frontend");
+// app.use(express.static(staticDir));
 
 const app = express();
 const port = 3000;
 
-app.use(cors())
+app.use(cors());
 
 const quotes = [
   {
-    quote: "Either write something worth reading or do something worth writing.",
+    quote:
+      "Either write something worth reading or do something worth writing.",
     author: "Benjamin Franklin",
   },
   {
@@ -23,13 +30,19 @@ function randomQuote() {
 }
 
 app.get("/", (req, res) => {
+  console.log('User hit the server')
+  res.sendFile(path.resolve(__dirname, "index.html"));
+});
+
+
+app.get("/", (_, res) => {
   const quote = randomQuote();
   res.json(quote);
 });
 
 app.post("/", (req, res) => {
   const bodyBytes = [];
-  req.on("data", chunk => bodyBytes.push(...chunk));
+  req.on("data", (chunk) => bodyBytes.push(...chunk));
   req.on("end", () => {
     const bodyString = String.fromCharCode(...bodyBytes);
     let body;
@@ -41,15 +54,21 @@ app.post("/", (req, res) => {
       return;
     }
     if (typeof body != "object" || !("quote" in body) || !("author" in body)) {
-      console.error(`Failed to extract quote and author from post body: ${bodyString}`);
-      res.status(400).send("Expected body to be a JSON object containing keys quote and author.");
+      console.error(
+        `Failed to extract quote and author from post body: ${bodyString}`
+      );
+      res
+        .status(400)
+        .send(
+          "Expected body to be a JSON object containing keys quote and author."
+        );
       return;
     }
     quotes.push({
       quote: body.quote,
       author: body.author,
     });
-    console.log(quotes)
+    console.log(quotes);
     res.send("ok");
   });
 });
