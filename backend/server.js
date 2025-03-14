@@ -11,6 +11,8 @@ const app = express();
 const port = 3000;
 
 app.use(cors());
+
+//setup static and middleware
 app.use(express.static(path.resolve(__dirname, 'static')))
 
 const quotes = [
