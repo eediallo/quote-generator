@@ -4,9 +4,6 @@ import path from "path";
 
 const __dirname = new URL("../frontend", import.meta.url).pathname;
 
-// const staticDir = path.join(__dirname, "..", "frontend");
-// app.use(express.static(staticDir));
-
 const app = express();
 const port = 3000;
 
