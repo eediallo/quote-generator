@@ -8,7 +8,7 @@ const port = 3000;
 
 app.use(cors());
 
-//setup static and middleware
+//setup static  files and middleware
 app.use(express.static(staticDir));
 
 const quotes = [
@@ -28,9 +28,6 @@ function randomQuote() {
   return quotes[index];
 }
 
-// app.get("/", (req, res) => {
-//   res.sendFile(path.resolve(__dirname, "index.html"));
-// });
 
 app.get("/api/quote", (_, res) => {
   const quote = randomQuote();
