@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 
-const __dirname = new URL("../frontend", import.meta.url).pathname;
+const staticDir = new URL("../frontend/static", import.meta.url).pathname;
 
 const app = express();
 const port = 3000;
@@ -10,7 +10,7 @@ const port = 3000;
 app.use(cors());
 
 //setup static and middleware
-// app.use(express.static(path.resolve(__dirname, 'static')))
+app.use(express.static(staticDir))
 
 const quotes = [
   {
