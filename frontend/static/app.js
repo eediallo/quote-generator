@@ -1,11 +1,13 @@
 
 
 const generateQuoteBtn = document.querySelector('#generate-quote-btn')
-const quoteEl = document.querySelector('#quote')
-const quoteInput = document.querySelector('#quote-input')
-const authorInput = document.querySelector('#author-input')
+const quoteEl = document.querySelector('#displayed-quote')
+console.log(quoteEl)
+const quoteInput = document.querySelector('#quote')
+const authorInput = document.querySelector('#author')
+const addQuoteBtn = document.querySelector('#add-quote')
 
-const endPoint = 'https://elhadj-abdoul-diallo-quote-generator-still-darkness-1788.fly.dev/'
+const endPoint = 'http://localhost:3000/api/quote'
 
 async function fetchQuote(){
     try{
@@ -17,6 +19,7 @@ async function fetchQuote(){
             throw new Error(`Failed to fetch quote: ${resp.status}`)
         }
         const data = await resp.json()
+        console.log(data)
         return data
     }catch(err){
         console.error(err.message)
@@ -30,7 +33,7 @@ async function addQuote() {
     };
 
     try {
-        const resp = await fetch('http://127.0.0.1:3000', {
+        const resp = await fetch('http://localhost:3000/', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(quote)
@@ -41,14 +44,21 @@ async function addQuote() {
         }
 
         const data = await resp.json();
+        console.log(data)
         console.log('Quote added successfully:', data);
     } catch (err) {
         console.error(err.message);
     }
 }
 
+//event to get and display quote
 generateQuoteBtn.addEventListener('click', async ()=>{
     const quote = await fetchQuote()
     quoteEl.textContent = `${quote.quote} - ${quote.author}`
 })
 
+// event to post quote
+addQuoteBtn.addEventListener('click', async(e)=>{
+    e.preventDefault()
+    await addQuote()
+})
