@@ -7,11 +7,12 @@ const quoteInput = document.querySelector('#quote')
 const authorInput = document.querySelector('#author')
 const addQuoteBtn = document.querySelector('#add-quote')
 
-const endPoint = 'http://localhost:3000/api/quote'
+
+const baseUrl = 'https://elhadj-abdoul-diallo-quote-generator-still-darkness-1788.fly.dev/'
 
 async function fetchQuote(){
     try{
-        const resp = await fetch(endPoint, {
+        const resp = await fetch(`${baseUrl}api/quote`, {
             method: 'GET',
             headers: {'content-type' : 'application/json'}
         })
@@ -33,7 +34,7 @@ async function addQuote() {
     };
 
     try {
-        const resp = await fetch('http://localhost:3000/', {
+        const resp = await fetch(baseUrl, {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(quote)
