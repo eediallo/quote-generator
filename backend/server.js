@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import path from "path";
 
 const staticDir = new URL("../frontend/static", import.meta.url).pathname;
 
@@ -10,7 +9,7 @@ const port = 3000;
 app.use(cors());
 
 //setup static and middleware
-app.use(express.static(staticDir))
+app.use(express.static(staticDir));
 
 const quotes = [
   {
@@ -33,11 +32,12 @@ function randomQuote() {
 //   res.sendFile(path.resolve(__dirname, "index.html"));
 // });
 
-
-app.get("/", (_, res) => {
+app.get("/api/quote", (_, res) => {
   const quote = randomQuote();
+  console.log(quote);
   res.json(quote);
 });
+
 
 app.post("/", (req, res) => {
   const bodyBytes = [];
@@ -67,8 +67,7 @@ app.post("/", (req, res) => {
       quote: body.quote,
       author: body.author,
     });
-    console.log(quotes);
-    res.send("ok");
+    res.json(body);
   });
 });
 
