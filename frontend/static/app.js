@@ -3,6 +3,7 @@ const quoteEl = document.querySelector("#displayed-quote");
 const quoteInput = document.querySelector("#quote");
 const authorInput = document.querySelector("#author");
 const addQuoteBtn = document.querySelector("#add-quote");
+const errorMsgEl = document.querySelector('#errMsg')
 
 const baseUrl =
   "https://elhadj-abdoul-diallo-quote-generator-still-darkness-1788.fly.dev/";
@@ -21,7 +22,7 @@ async function fetchQuote() {
 // post quote
 async function addQuote() {
   try {
-    const { data } = await axios.post(
+    const resp = await axios.post(
       localhost,
       {
         quote: quoteInput.value.trim(),
@@ -32,10 +33,10 @@ async function addQuote() {
       }
     );
     quoteInput.value = "";
-    authorInput.value = "";
-    return data
+    authorInput.value = ""
+    console.log(resp)
   } catch (err) {
-    console.error(err.message);
+    errorMsgEl.textContent = err.response.data.msg
   }
 }
 
