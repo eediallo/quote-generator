@@ -35,8 +35,11 @@ async function addQuote() {
     quoteInput.value = "";
     authorInput.value = "";
     errorMsgEl.textContent = "Quote added successfully!";
+    errorMsgEl.style.color = "green";
+    quoteInput.style.backgroundColor = "";
+    authorInput.style.backgroundColor = "";
   } catch (err) {
-    errorMsgEl.textContent = err.response.data.msg;
+    showValidationError(err);
   }
 }
 
@@ -52,3 +55,23 @@ addQuoteBtn.addEventListener("click", async (e) => {
   e.preventDefault();
   await addQuote();
 });
+
+function showValidationError(err) {
+  errorMsgEl.style.color = "red";
+  if (!quoteInput.value.trim() && !authorInput.value.trim()) {
+    errorMsgEl.textContent = err.response.data.msg;
+    quoteInput.style.backgroundColor = "lightblue";
+    authorInput.style.backgroundColor = "lightblue";
+    quoteInput.focus();
+  } else if (!quoteInput.value.trim()) {
+    errorMsgEl.textContent = err.response.data.msg;
+    quoteInput.style.backgroundColor = "lightblue";
+    authorInput.style.backgroundColor = "";
+    quoteInput.focus();
+  } else if (!authorInput.value.trim()) {
+    errorMsgEl.textContent = err.response.data.msg;
+    authorInput.style.backgroundColor = "lightblue";
+    quoteInput.style.backgroundColor = "";
+    authorInput.focus();
+  }
+}
