@@ -7,7 +7,6 @@ const errorMsgEl = document.querySelector("#errMsg");
 
 const baseUrl =
   "https://elhadj-abdoul-diallo-quote-generator-still-darkness-1788.fly.dev/";
-//const localhost = "http://localhost:3000/";
 
 // get quote
 async function fetchQuote() {
@@ -22,7 +21,7 @@ async function fetchQuote() {
 // post quote
 async function addQuote() {
   try {
-    const resp = await axios.post(
+    await axios.post(
       baseUrl,
       {
         quote: quoteInput.value.trim(),
