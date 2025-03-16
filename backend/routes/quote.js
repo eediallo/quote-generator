@@ -1,5 +1,5 @@
 import { quotes } from "../data.js";
-import express, { Router } from "express";
+import express from "express";
 
 const quoteRouter = express.Router();
 

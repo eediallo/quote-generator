@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import { quoteRouter } from "./routes/quote.js";
+import { quoteRouter } from "../routes/quote.js";
 
 const staticDir = new URL("../frontend/static", import.meta.url).pathname;
 
