@@ -35,7 +35,6 @@ async function addQuote() {
     quoteInput.value = "";
     authorInput.value = "";
     errorMsgEl.textContent = "Quote added successfully!";
-    console.log(resp);
   } catch (err) {
     errorMsgEl.textContent = err.response.data.msg;
   }
