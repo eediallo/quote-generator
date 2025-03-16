@@ -62,7 +62,7 @@ app.post("/", (req, res) => {
       console.error(`Both quote and author must be provided`);
       res.status(400).json({
         success: false,
-        msg: "Both quote and author must be provided`",
+        msg: "Both quote and author must be provided",
       });
       return;
     }
