@@ -57,7 +57,7 @@ quoteRouter.post("/", (req, res) => {
       console.error(`Author must be provided`);
       res
         .status(400)
-        .json({ success: false, msg: "Please provide a an author" });
+        .json({ success: false, msg: "Please provide an author" });
       return;
     }
 
