@@ -2,12 +2,13 @@
     "name": "quote-generator",
     "type": "module",
     "dependencies": {
+        "axios": "^1.8.3",
         "cors": "^2.8.5",
         "express": "^4.21.2"
     },
     "scripts": {
         "start": "node backend/server.js",
-        "dev" : "nodemon backend/server.js"
+        "dev": "nodemon backend/server.js"
     },
     "devDependencies": {
         "@flydotio/dockerfile": "^0.7.8",
