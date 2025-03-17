@@ -12,6 +12,9 @@ const port = 3000;
 
 app.use(cors());
 
+// parse json
+app.use(express.json())
+
 //setup static  files and middleware
 app.use(express.static(staticDir));
 
