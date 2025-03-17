@@ -11,7 +11,7 @@ const baseUrl =
 // get quote
 async function fetchQuote() {
   try {
-    const resp = await axios.get(`${baseUrl}api/v1/quotes`);
+    const resp = await axios.get(`${baseUrl}api/v1/quote`);
     return resp.data;
   } catch (err) {
     console.error(err.message);
