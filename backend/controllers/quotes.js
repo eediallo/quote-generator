@@ -47,7 +47,7 @@ const createQuote = async (req, res) => {
   } catch (err) {
     console.log(err.message);
   }
-  
+
   if (typeof quote != "object" || !("quote" in quote) || !("author" in quote)) {
     console.error(
       `Failed to extract quote and author from post quote: ${quote}`
@@ -80,6 +80,7 @@ const createQuote = async (req, res) => {
     return;
   }
 
+  // add quote to db
   quotesData.push({
     quote: quote.quote,
     author: quote.author,
