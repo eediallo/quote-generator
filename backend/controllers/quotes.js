@@ -1,4 +1,5 @@
 import { Quote } from "../models/quotes.js";
+import { quotes } from "../db/quotes.js";
 
 function randomQuote(quotes) {
   const index = Math.floor(Math.random() * quotes.length);
@@ -9,7 +10,7 @@ function randomQuote(quotes) {
 const getAllQuotes = async (req, res) => {
   try {
     const quotes = await Quote.find({});
-    res.status(200).json({ success: true, quotes: quotes });
+    res.status(200).json({success: true, quotes})
   } catch (err) {
     res.status(500).json({ success: false, msg: err.message });
   }
@@ -18,9 +19,11 @@ const getAllQuotes = async (req, res) => {
 // get single random quote
 const getQuote = async (req, res) => {
   try {
-    const quotesData = await Quote.find({});
+    const quotesData = await quotes();
     if (quotesData.length === 0) {
-      return res.status(404).json({ success: false, msg: "No quotes found. Please add a quote" });
+      return res
+        .status(404)
+        .json({ success: false, msg: "No quotes found. Please add a quote" });
     }
     const quote = randomQuote(quotesData);
     res.status(200).json({ success: true, quote: quote });
@@ -29,7 +32,14 @@ const getQuote = async (req, res) => {
   }
 };
 
+// create a quote
 const createQuote = async (req, res) => {
+  const quotesData = await quotes();
+  if (quotesData.length === 0) {
+    return res
+      .status(404)
+      .json({ success: false, msg: "No quotes found. Please add a quote" });
+  }
   let quote;
   try {
     // create quote from Quote model
@@ -71,7 +81,7 @@ const createQuote = async (req, res) => {
     return;
   }
 
-  quotes.push({
+  quotesData.push({
     quote: quote.quote,
     author: quote.author,
   });
