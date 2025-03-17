@@ -1,4 +1,3 @@
-import { quotes } from "../data.js";
 import { Quote } from "../models/quotes.js";
 
 function randomQuote(quotes) {
@@ -21,7 +20,7 @@ const getQuote = async (req, res) => {
   try {
     const quotesData = await Quote.find({});
     if (quotesData.length === 0) {
-      return res.status(404).json({ success: false, msg: "No quotes found" });
+      return res.status(404).json({ success: false, msg: "No quotes found. Please add a quote" });
     }
     const quote = randomQuote(quotesData);
     res.status(200).json({ success: true, quote: quote });
