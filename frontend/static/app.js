@@ -12,7 +12,6 @@ const baseUrl =
 async function fetchQuote() {
   try {
     const resp = await axios.get(`${baseUrl}/api/v1/quote`);
-    console.log(resp)
     return resp.data;
   } catch (err) {
     console.error(err.message);
@@ -46,8 +45,8 @@ async function addQuote() {
 //event to get and display quote
 generateQuoteBtn.addEventListener("click", async (e) => {
   e.preventDefault();
-  const quote = await fetchQuote();
-  quoteEl.textContent = `${quote.quote} - ${quote.author}`;
+  const data = await fetchQuote();
+  quoteEl.textContent = `${data.quote.quote} - ${data.quote.author}`;
 });
 
 // event to post quote
