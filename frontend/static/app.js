@@ -6,7 +6,7 @@ const addQuoteBtn = document.querySelector("#add-quote");
 const errorMsgEl = document.querySelector("#errMsg");
 
 const baseUrl =
-  "https://elhadj-abdoul-diallo-quote-generator-still-darkness-1788.fly.dev/";
+  "https://quote-generator-iwnw.onrender.com/";
 
 // get quote
 async function fetchQuote() {
