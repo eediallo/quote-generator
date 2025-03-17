@@ -6,12 +6,13 @@ const addQuoteBtn = document.querySelector("#add-quote");
 const errorMsgEl = document.querySelector("#errMsg");
 
 const baseUrl =
-  "https://quote-generator-iwnw.onrender.com/";
+  "https://quote-generator-iwnw.onrender.com";
 
 // get quote
 async function fetchQuote() {
   try {
-    const resp = await axios.get(`${baseUrl}api/v1/quote`);
+    const resp = await axios.get(`${baseUrl}/api/v1/quote`);
+    console.log(resp)
     return resp.data;
   } catch (err) {
     console.error(err.message);
