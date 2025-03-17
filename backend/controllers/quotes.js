@@ -6,16 +6,28 @@ function randomQuote() {
   return quotes[index];
 }
 
-const getQuote = () => {
-  (_, res) => {
-    const quote = randomQuote();
-    res.json(quote);
-  };
+
+const getAllQuotes = async(req, res)=>{
+    try{
+        const quotes = await Quote.find({})
+        res.status(200).json({success: true, quotes: quotes})
+    }catch(err){
+        res.status(500).json({success: false, msg: err.message})
+    }
+}
+const getQuote = async() => {
+    // (_, res) => {
+    //     const quote = randomQuote();
+    //     res.json(quote);
+    // };
+    // const quotesData = await Quote.find({})
+    // console.log(quotesData)
 };
 
 const createQuote = async (req, res) => {
   let quote;
   try {
+    // create quote from Quote model
     quote = await Quote.create(req.body);
   } catch (err) {
     console.log(err.message);
@@ -61,4 +73,4 @@ const createQuote = async (req, res) => {
   res.status(201).json({ success: true, quote: quote });
 };
 
-export { createQuote, getQuote };
+export { createQuote, getQuote, getAllQuotes};
