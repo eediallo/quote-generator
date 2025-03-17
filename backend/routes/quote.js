@@ -8,7 +8,7 @@ function randomQuote() {
   return quotes[index];
 }
 
-quoteRouter.get("/api/quote", (_, res) => {
+quoteRouter.get("/api/v1/quotes", (_, res) => {
   const quote = randomQuote();
   res.json(quote);
 });
