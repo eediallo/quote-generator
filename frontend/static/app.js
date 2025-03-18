@@ -58,17 +58,17 @@ addQuoteBtn.addEventListener("click", async (e) => {
 function showValidationError(err) {
   errorMsgEl.style.color = "red";
   if (!quoteInput.value.trim() && !authorInput.value.trim()) {
-    errorMsgEl.textContent = err.response.data.msg;
+    errorMsgEl.textContent = err.response.data.msg.message;
     quoteInput.style.backgroundColor = "lightblue";
     authorInput.style.backgroundColor = "lightblue";
     quoteInput.focus();
   } else if (!quoteInput.value.trim()) {
-    errorMsgEl.textContent = err.response.data.msg;
+    errorMsgEl.textContent = err.response.data.message;
     quoteInput.style.backgroundColor = "lightblue";
     authorInput.style.backgroundColor = "";
     quoteInput.focus();
   } else if (!authorInput.value.trim()) {
-    errorMsgEl.textContent = err.response.data.msg;
+    errorMsgEl.textContent = err.response.data.message;
     authorInput.style.backgroundColor = "lightblue";
     quoteInput.style.backgroundColor = "";
     authorInput.focus();
