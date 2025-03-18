@@ -1,5 +1,6 @@
 import { Quote } from "../models/quotes.js";
 import { quotes } from "../db/quotes.js";
+import { asyncWrapper } from "../middleware/async.js";
 
 function randomQuote(quotes) {
   const index = Math.floor(Math.random() * quotes.length);
@@ -7,46 +8,34 @@ function randomQuote(quotes) {
 }
 
 // get all quotes
-const getAllQuotes = async (req, res) => {
-  try {
-    const quotes = await Quote.find({});
-    res.status(200).json({success: true, quotes})
-  } catch (err) {
-    res.status(500).json({ success: false, msg: err.message });
-  }
-};
+const getAllQuotes = asyncWrapper(async (req, res) => {
+  const quotes = await Quote.find({});
+  res.status(200).json({ success: true, quotes });
+});
 
 // get single random quote
-const getQuote = async (req, res) => {
-  try {
-    const quotesData = await quotes();
-    if (quotesData.length === 0) {
-      return res
-        .status(404)
-        .json({ success: false, msg: "No quotes found. Please add a quote" });
-    }
-    const quote = randomQuote(quotesData);
-    res.status(200).json({ success: true, quote: quote });
-  } catch (err) {
-    res.status(500).json({ success: false, msg: err.message });
-  }
-};
-
-// create a quote
-const createQuote = async (req, res) => {
+const getQuote = asyncWrapper(async (req, res) => {
   const quotesData = await quotes();
   if (quotesData.length === 0) {
     return res
       .status(404)
       .json({ success: false, msg: "No quotes found. Please add a quote" });
   }
-  let quote;
-  try {
-    // create quote from Quote model
-    quote = await Quote.create(req.body);
-  } catch (err) {
-    console.log(err.message);
+  const quote = randomQuote(quotesData);
+  res.status(200).json({ success: true, quote: quote });
+});
+
+// create a quote
+const createQuote = asyncWrapper(async (req, res) => {
+  const quotesData = await quotes();
+  if (quotesData.length === 0) {
+    return res
+      .status(404)
+      .json({ success: false, msg: "No quotes found. Please add a quote" });
   }
+
+  // create quote from Quote model
+  let quote = await Quote.create(req.body);
 
   if (typeof quote != "object" || !("quote" in quote) || !("author" in quote)) {
     console.error(
@@ -86,6 +75,6 @@ const createQuote = async (req, res) => {
     author: quote.author,
   });
   res.status(201).json({ success: true, quote: quote });
-};
+});
 
 export { createQuote, getQuote, getAllQuotes };
