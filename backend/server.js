@@ -4,6 +4,7 @@ import { quoteRouter } from "./routes/quote.js";
 import { connectDB } from "./db/connect.js";
 import dotenv from 'dotenv'
 import { notFound } from "./middleware/notFound.js";
+import { errorHandler } from "./middleware/errorHandler.js";
 dotenv.config()
 
 const staticDir = new URL("../frontend/static", import.meta.url).pathname;
@@ -24,6 +25,9 @@ app.use("/", quoteRouter);
 
 // page not found handler
 app.use(notFound)
+
+// pars error handler
+app.use(errorHandler)
 
 const start = async () => {
   try {
