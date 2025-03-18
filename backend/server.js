@@ -3,6 +3,7 @@ import cors from "cors";
 import { quoteRouter } from "./routes/quote.js";
 import { connectDB } from "./db/connect.js";
 import dotenv from 'dotenv'
+import { notFound } from "./middleware/notFound.js";
 dotenv.config()
 
 const staticDir = new URL("../frontend/static", import.meta.url).pathname;
@@ -20,6 +21,9 @@ app.use(express.static(staticDir));
 
 // quote router
 app.use("/", quoteRouter);
+
+// page not found handler
+app.use(notFound)
 
 const start = async () => {
   try {
