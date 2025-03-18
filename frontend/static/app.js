@@ -45,8 +45,8 @@ async function addQuote() {
 //event to get and display quote
 generateQuoteBtn.addEventListener("click", async (e) => {
   e.preventDefault();
-  const data = await fetchQuote();
-  quoteEl.textContent = `${data.quote.quote} - ${data.quote.author}`;
+  const {quote: {quote, author}} = await fetchQuote();
+  quoteEl.textContent = `${quote} - ${author}`;
 });
 
 // event to post quote
@@ -74,3 +74,10 @@ function showValidationError(err) {
     authorInput.focus();
   }
 }
+
+async function displayQuote(){
+  const {quote: {quote, author}} = await fetchQuote()
+   quoteEl.textContent = `${quote} - ${author}`
+}
+
+window.onload = displayQuote
