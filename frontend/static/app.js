@@ -36,6 +36,9 @@ async function addQuote() {
     errorMsgEl.style.color = "green";
     quoteInput.style.backgroundColor = "";
     authorInput.style.backgroundColor = "";
+    setTimeout(() => {
+      errorMsgEl.textContent = "";
+    }, 3000);
   } catch (err) {
     showValidationError(err);
     setTimeout(() => {
