@@ -22,7 +22,7 @@ const getQuote = asyncWrapper(async (req, res) => {
       .json({ success: false, msg: "No quotes found. Please add a quote" });
   }
   const quote = randomQuote(quotesData);
-  res.status(200).json({ success: true, quote: quote });
+  res.status(200).json({ success: true, quote });
 });
 
 // create a quote
@@ -74,7 +74,7 @@ const createQuote = asyncWrapper(async (req, res) => {
     quote: quote.quote,
     author: quote.author,
   });
-  res.status(201).json({ success: true, quote: quote });
+  res.status(201).json({ success: true, quote });
 });
 
 export { createQuote, getQuote, getAllQuotes };
