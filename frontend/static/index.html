@@ -5,15 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quote Generator App</title>
     <script type="module" src="./app.js" defer></script>
+    <link rel="stylesheet" href="./styles.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
     <h1>Quote Generator App</h1>
     <form action="">
-        <label for="quote-input">Enter quote: </label>
-        <textarea name="quote" id="quote" cols="24" rows="4"></textarea><br><br>
-        <label for="author">Enter author: </label>
-        <input type="text" id="author" name="author"><br><br>
+        <div class="quote-wrapper">
+            <label for="quote-input" aria-label="Enter quote"></label>
+            <textarea name="quote" id="quote" cols="24" rows="4" placeholder="e.g : If you fall, fall on your back. If you can look up, you can get up "></textarea><br><br>
+        </div>
+        <div class="author-wrapper">
+            <label for="author" aria-label="Enter author"></label>
+            <input type="text" id="author" name="author" placeholder="e.g: Less Brown"><br><br>
+        </div>
         <button id="add-quote">Add quote</button><br><br>
     </form>
     <p id="errMsg"></p>

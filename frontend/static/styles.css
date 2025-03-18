@@ -1,0 +1,31 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form{
+    background-color: rgb(204, 197, 197);
+    padding: 10px;
+    border-radius: 8px;
+    width: 500px;
+    text-align: center;
+}
+
+input, textarea{
+    width: 400px;
+    border-radius: 5px;
+    border: none;
+}
+
+.quote-wrapper, .author-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input{
+    padding:5px;
+    margin-top: 12px;
+}
