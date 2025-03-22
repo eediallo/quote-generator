@@ -28,14 +28,14 @@ const getQuote = asyncWrapper(async (req, res) => {
 const createQuote = asyncWrapper(async (req, res) => {
   const quotesData = await quotes();
   if (quotesData.length === 0) {
-    throw new notFoundError("No quotes found. Please add a quote", 404);
+    throw new notFoundError("No quotes found. Please add a quote");
   }
 
   let quote;
   try {
     quote = await Quote.create(req.body);
   } catch (error) {
-    throw new BadRequestError("Failed to create quote. Invalid input", 400);
+    throw new BadRequestError("Failed to create quote. Invalid input");
   }
 
   if (
@@ -44,13 +44,12 @@ const createQuote = asyncWrapper(async (req, res) => {
     !("author" in quote)
   ) {
     throw new BadRequestError(
-      "Expected quote to be a JSON object containing keys quote and author.",
-      400
+      "Expected quote to be a JSON object containing keys quote and author."
     );
   }
 
   if (!quote.quote || !quote.author) {
-    throw new notFoundError("Please provide a quote and an author", 404);
+    throw new notFoundError("Please provide a quote and an author");
   }
   // add quote to db
   quotesData.push({
