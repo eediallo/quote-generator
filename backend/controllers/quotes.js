@@ -28,7 +28,7 @@ const getQuote = asyncWrapper(async (req, res) => {
 const createQuote = asyncWrapper(async (req, res) => {
   const { quote, author } = req.body;
   if (!quote || !author) {
-    throw new BadRequestError("Please provide quote and author.");
+    throw new BadRequestError("Please provide a quote and an author.");
   }
   const newQuote = await Quote.create(req.body);
   res.status(201).json({ success: true, newQuote });
