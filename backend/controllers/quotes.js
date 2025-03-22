@@ -32,6 +32,16 @@ const createQuote = asyncWrapper(async (req, res) => {
   }
   const newQuote = await Quote.create(req.body);
   res.status(201).json({ success: true, newQuote });
+  
 });
 
-export { createQuote, getQuote, getAllQuotes };
+const deleteQuote = asyncWrapper(async (req, res) => {
+  const { id } = req.params;
+  const quote = await Quote.findByIdAndDelete(id);
+  if (!quote) {
+    throw new NotFoundError(`No quote with id : ${id}`);
+  }
+  res.status(200).json({ success: true, quote });
+});
+
+export { createQuote, getQuote, getAllQuotes, deleteQuote };
