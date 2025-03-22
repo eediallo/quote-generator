@@ -18,7 +18,7 @@ const getAllQuotes = asyncWrapper(async (req, res) => {
 const getQuote = asyncWrapper(async (req, res) => {
   const quotesData = await quotes();
   if (quotesData.length === 0) {
-    throw new notFoundError("No quotes found. Please add a quote", 404);
+    throw new notFoundError("No quotes found. Please add a quote");
   }
   const quote = randomQuote(quotesData);
   res.status(200).json({ success: true, quote });
