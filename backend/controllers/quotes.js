@@ -31,12 +31,7 @@ const createQuote = asyncWrapper(async (req, res) => {
     throw new notFoundError("No quotes found. Please add a quote");
   }
 
-  let quote;
-  try {
-    quote = await Quote.create(req.body);
-  } catch (error) {
-    throw new BadRequestError("Failed to create quote. Invalid input");
-  }
+  const quote = await Quote.create(req.body);
 
   if (
     typeof quote !== "object" ||
