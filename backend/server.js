@@ -5,6 +5,7 @@ import { connectDB } from "./db/connect.js";
 import dotenv from "dotenv";
 import { notFound } from "./middleware/notFound.js";
 import { errorHandler } from "./middleware/errorHandler.js";
+import { authRouter } from "./routes/user.js";
 dotenv.config();
 
 const staticDir = new URL("../frontend/static", import.meta.url).pathname;
@@ -20,8 +21,9 @@ app.use(express.json());
 //setup static  files and middleware
 app.use(express.static(staticDir));
 
-// quote router
+// routes
 app.use("/", quoteRouter);
+app.use("/api/v1/auth", authRouter);
 
 // page not found handler
 
