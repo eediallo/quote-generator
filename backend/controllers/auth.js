@@ -1,3 +1,4 @@
+import { BadRequestError } from "../errors/badRequestError.js";
 import { User } from "../models/user.js";
 import { StatusCodes } from "http-status-codes";
 
@@ -8,7 +9,16 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  res.send("Login");
+  const { email, password } = req.body;
+  if (!email || !password) {
+    throw new BadRequestError("Please provide email and password");
+  }
+  const user = await User.findOne({ email });
+  if (!user) {
+    throw new BadRequestError("Invalid credentials");
+  }
+  const token = await user.createJWT();
+  res.status(StatusCodes.OK).json({ user: { name: user.name }, token });
 };
 
 export { register, login };
