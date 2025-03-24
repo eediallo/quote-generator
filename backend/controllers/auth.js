@@ -19,6 +19,12 @@ const login = asyncWrapper(async (req, res) => {
   if (!user) {
     throw new UnauthenticatedError("Invalid credentials");
   }
+
+  const isPasswordCorrect = await user.comparePassword(password);
+  if (!isPasswordCorrect) {
+    throw new UnauthenticatedError("Invalid credentials");
+  }
+
   const token = await user.createJWT();
   res.status(StatusCodes.OK).json({ user: { name: user.name }, token });
 });
