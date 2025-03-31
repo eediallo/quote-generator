@@ -5,7 +5,7 @@ const authorInput = document.querySelector("#author");
 const addQuoteBtn = document.querySelector("#add-quote");
 const errorMsgEl = document.querySelector("#errMsg");
 
-const baseUrl = "https://quote-generator-iwnw.onrender.com";
+const baseUrl = "https://eediallo-qoute-server.hosting.codeyourfuture.io";
 
 // get quote
 async function fetchQuote() {
