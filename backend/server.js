@@ -8,7 +8,6 @@ import { errorHandler } from "./middleware/errorHandler.js";
 import { authRouter } from "./routes/user.js";
 dotenv.config();
 
-const staticDir = new URL("../frontend/static", import.meta.url).pathname;
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -18,8 +17,15 @@ app.use(cors());
 // parse json
 app.use(express.json());
 
-//setup static  files and middleware
-app.use(express.static(staticDir));
+app.get("/", (req, res) => {
+  res.send(`
+     <h1>
+        eediallo Quote Server
+    </h1>
+    <p> <a href="/api/v1/quotes">All quotes</a></p>
+    <p><a href="/api/v1/quote">Random quote</a></p>
+    `);
+});
 
 // routes
 app.use("/", quoteRouter);
