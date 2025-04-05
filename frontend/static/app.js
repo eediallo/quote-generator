@@ -84,9 +84,8 @@ function showValidationError(err) {
 }
 
 async function displayQuote() {
-  const {
-    quote: { quote, author },
-  } = await fetchQuote();
+  const { quote: data } = await fetchQuote();
+  const { quote, author } = data;
   quoteEl.textContent = `${quote} - ${author}`;
 }
 
