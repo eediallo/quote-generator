@@ -10,8 +10,8 @@ import { protect } from "../middleware/auth.js";
 const quoteRouter = express.Router();
 
 quoteRouter.get("/quote", getQuote);
-quoteRouter.get("/", getAllQuotes);
+quoteRouter.get("/all", getAllQuotes);
 quoteRouter.delete("/api/v1/quote/:id", protect, deleteQuote);
-quoteRouter.post("/", createQuote);
+quoteRouter.post("/create_quote", createQuote);
 
 export { quoteRouter };
