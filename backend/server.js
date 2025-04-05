@@ -38,9 +38,7 @@ const swaggerOptions = {
 
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
 
-if (process.env.NODE_ENV !== "production") {
-  app.use("/", swaggerUiExpress.serve, swaggerUiExpress.setup(swaggerSpec));
-}
+app.use("/", swaggerUiExpress.serve, swaggerUiExpress.setup(swaggerSpec));
 
 // routes
 app.use("/api/v1/quotes", quoteRouter);
