@@ -1,0 +1,45 @@
+openapi: 3.0.0
+info:
+  title: quote-generator-final
+  version: 1.0.0
+servers:
+  - url: https://eediallo-qoute-server.hosting.codeyourfuture.io/api/v1/quotes
+paths:
+  /quote:
+    get:
+      tags:
+        - General
+      summary: Get quote
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /quotes:
+    get:
+      tags:
+        - General
+      summary: Get all quotes
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /:
+    post:
+      tags:
+        - General
+      summary: create quote
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                quote: Your best enemy is yourself
+                author: Unknown
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
