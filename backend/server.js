@@ -8,6 +8,7 @@ import { errorHandler } from "./middleware/errorHandler.js";
 import { authRouter } from "./routes/user.js";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUiExpress from "swagger-ui-express";
+import { StatusCodes } from "http-status-codes";
 dotenv.config();
 
 const app = express();
@@ -29,7 +30,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: "https://eediallo-qoute-server.hosting.codeyourfuture.io/api/v1/quotes",
+        url: "https://eediallo-qoute-server.hosting.codeyourfuture.io/api/v1",
       },
     ],
   },
@@ -38,7 +39,19 @@ const swaggerOptions = {
 
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
 
-app.use("/", swaggerUiExpress.serve, swaggerUiExpress.setup(swaggerSpec));
+app.use(
+  "/api-docs",
+  swaggerUiExpress.serve,
+  swaggerUiExpress.setup(swaggerSpec)
+);
+
+app.get("/", (req, res) => {
+  res
+    .status(StatusCodes.OK)
+    .send(
+      '<h1>Quote Generator</h1><a href="/api-docs">Access Documentation here</a>'
+    );
+});
 
 // routes
 app.use("/api/v1/quotes", quoteRouter);

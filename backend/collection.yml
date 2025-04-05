@@ -3,7 +3,7 @@ info:
   title: quote-generator-final
   version: 1.0.0
 servers:
-  - url: https://eediallo-qoute-server.hosting.codeyourfuture.io/api/v1/quotes
+  - url: https://eediallo-qoute-server.hosting.codeyourfuture.io/api/v1
 paths:
   /quote:
     get:
