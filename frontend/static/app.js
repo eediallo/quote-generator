@@ -6,12 +6,12 @@ const addQuoteBtn = document.querySelector("#add-quote");
 const errorMsgEl = document.querySelector("#errMsg");
 
 const baseUrl =
-  "https://eediallo-qoute-server.hosting.codeyourfuture.io";
+  "https://eediallo-qoute-server.hosting.codeyourfuture.io/api/v1/quotes";
 
 // get quote
 async function fetchQuote() {
   try {
-    const resp = await axios.get(`${baseUrl}/api/v1/quotes/quote`);
+    const resp = await axios.get(`${baseUrl}/quote`);
     return resp.data;
   } catch (err) {
     console.error(err.message);
@@ -22,7 +22,7 @@ async function fetchQuote() {
 async function addQuote() {
   try {
     await axios.post(
-      `${baseUrl}/api/v1/quotes/create_quote`,
+      `${baseUrl}/create_quote`,
       {
         quote: quoteInput.value.trim(),
         author: authorInput.value.trim(),
