@@ -3,7 +3,7 @@ info:
   title: quote-generator-final
   version: 1.0.0
 servers:
-  - url: https://eediallo-qoute-server.hosting.codeyourfuture.io/api/v1
+  - url: undefined://{{URL}}
 paths:
   /quote:
     get:
@@ -11,21 +11,21 @@ paths:
         - General
       summary: Get quote
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json: {}
-  /quotes:
+  /all:
     get:
       tags:
         - General
       summary: Get all quotes
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json: {}
-  /:
+  /create_quote:
     post:
       tags:
         - General
@@ -36,10 +36,10 @@ paths:
             schema:
               type: object
               example:
-                quote: Your best enemy is yourself
+                quote: Never compare yourself to others.
                 author: Unknown
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json: {}
