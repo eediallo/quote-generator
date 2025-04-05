@@ -30,7 +30,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: "http://localhost:3000/api/v1/quotes",
+        url: "https://eediallo-qoute-server.hosting.codeyourfuture.io/api/v1/quotes",
       },
     ],
   },
