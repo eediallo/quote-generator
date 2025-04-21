@@ -144,7 +144,7 @@ form button:hover {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   h1 {
     font-size: 2rem;
   }
@@ -164,6 +164,7 @@ form button:hover {
 
   form {
     padding: 20px;
+    width: 100%;
   }
 
   form input {
@@ -176,7 +177,7 @@ form button:hover {
   }
 }
 
-@media (max-width: 480px) {
+@media screen and (max-width: 480px) {
   h1 {
     font-size: 1.8rem;
   }
@@ -196,6 +197,7 @@ form button:hover {
 
   form {
     padding: 15px;
+    width: 100%;
   }
 
   form input {
