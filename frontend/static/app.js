@@ -17,6 +17,7 @@ form.style.display = "none";
 toggleFormBtn.addEventListener("click", () => {
   const isVisible = form.style.display === "block";
   form.style.display = isVisible ? "none" : "block";
+  toggleFormBtn.textContent = isVisible ? "Add quote" : "Hide Form";
 });
 
 // Submit the quote
