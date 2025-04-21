@@ -77,3 +77,7 @@ quote-generator/
 ### Quotes
 - `GET /api/v1/quotes/quote`: Fetch a random quote.
 - `POST /api/v1/quotes/create_quote`: Add a new quote.
+
+## Note on Authentication
+
+While the codebase includes some files and middleware related to authentication, such as `auth.js` in the `controllers` and `middleware` directories, authentication is not yet implemented in the application. Future updates may include this feature.
