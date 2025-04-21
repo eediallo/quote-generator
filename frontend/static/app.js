@@ -3,12 +3,41 @@ const quoteEl = document.querySelector("#displayed-quote");
 const quoteInput = document.querySelector("#quote");
 const authorInput = document.querySelector("#author");
 const addQuoteBtn = document.querySelector("#add-quote");
+const toggleFormBtn = document.querySelector("#toggle-form-btn");
 const errorMsgEl = document.querySelector("#errMsg");
+const form = document.querySelector("#quote-form");
 
 const baseUrl =
   "https://eediallo-qoute-server.hosting.codeyourfuture.io/api/v1/quotes";
 
-// get quote
+// Hide form on initial load
+form.style.display = "none";
+
+// Toggle the form visibility
+toggleFormBtn.addEventListener("click", () => {
+  const isVisible = form.style.display === "block";
+  form.style.display = isVisible ? "none" : "block";
+});
+
+// Submit the quote
+addQuoteBtn.addEventListener("click", async (e) => {
+  e.preventDefault();
+  await addQuote();
+});
+
+// Fetch and display a random quote
+generateQuoteBtn.addEventListener("click", async (e) => {
+  e.preventDefault();
+  const {
+    quote: { quote, author },
+  } = await fetchQuote();
+  quoteEl.textContent = `${quote} - ${author}`;
+});
+
+// On page load, display one quote
+window.onload = displayQuote;
+
+// Helpers
 async function fetchQuote() {
   try {
     const resp = await axios.get(`${baseUrl}/quote`);
@@ -18,7 +47,6 @@ async function fetchQuote() {
   }
 }
 
-// post quote
 async function addQuote() {
   try {
     await axios.post(
@@ -39,6 +67,7 @@ async function addQuote() {
     authorInput.style.backgroundColor = "";
     setTimeout(() => {
       errorMsgEl.textContent = "";
+      form.style.display = "none"; // Hide form after success message
     }, 3000);
   } catch (err) {
     showValidationError(err);
@@ -47,21 +76,6 @@ async function addQuote() {
     }, 5000);
   }
 }
-
-//event to get and display quote
-generateQuoteBtn.addEventListener("click", async (e) => {
-  e.preventDefault();
-  const {
-    quote: { quote, author },
-  } = await fetchQuote();
-  quoteEl.textContent = `${quote} - ${author}`;
-});
-
-// event to post quote
-addQuoteBtn.addEventListener("click", async (e) => {
-  e.preventDefault();
-  await addQuote();
-});
 
 function showValidationError(err) {
   errorMsgEl.style.color = "red";
@@ -88,5 +102,3 @@ async function displayQuote() {
   const { quote, author } = data;
   quoteEl.textContent = `${quote} - ${author}`;
 }
-
-window.onload = displayQuote;

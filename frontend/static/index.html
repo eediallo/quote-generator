@@ -1,30 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quote Generator App</title>
     <script type="module" src="./app.js" defer></script>
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</head>
-<body>
-    <h1>Quote Generator App</h1>
-    <form action="">
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="title">Quote Generator</h1>
+
+      <!-- Displayed Quote -->
+      <div class="quote-box displayed-quote-container">
+        <p id="displayed-quote" class="quote">
+          Click the button to generate a quote
+        </p>
+        <p id="displayed-author" class="author"></p>
+      </div>
+
+      <!-- Generate and Add Buttons -->
+      <div class="btns">
+        <button id="generate-quote-btn" class="btn primary">
+          Generate Quote
+        </button>
+        <button id="toggle-form-btn" class="btn secondary">Add Quote</button>
+      </div>
+
+      <!-- Add Quote Form (Initially Hidden) -->
+      <form id="quote-form" style="display: none">
         <div class="quote-wrapper">
-            <label for="quote-input" aria-label="Enter quote"></label>
-            <textarea name="quote" id="quote" cols="24" rows="4" placeholder="e.g : If you fall, fall on your back. If you can look up, you can get up "></textarea><br><br>
+          <textarea
+            name="quote"
+            id="quote"
+            cols="24"
+            rows="4"
+            placeholder='e.g: "If you fall, fall on your back. If you can look up, you can get up."'
+            required
+          ></textarea>
         </div>
         <div class="author-wrapper">
-            <label for="author" aria-label="Enter author"></label>
-            <input type="text" id="author" name="author" placeholder="e.g: Less Brown"><br><br>
+          <input
+            type="text"
+            id="author"
+            name="author"
+            placeholder="e.g: Les Brown"
+            required
+          />
         </div>
-        <button id="add-quote">Add quote</button><br><br>
-    </form>
-    <p id="errMsg"></p>
-    <button id="generate-quote-btn">Generate a quote</button>
-    <div class="displayed-quote-container">
-        <p id="displayed-quote"></p>
+        <button type="submit" id="add-quote" class="btn primary">
+          Submit Quote
+        </button>
+        <p id="errMsg"></p>
+      </form>
     </div>
-</body>
+  </body>
 </html>
