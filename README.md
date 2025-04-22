@@ -21,34 +21,6 @@ The Quote Generator App is a simple web application that allows users to generat
 - Express.js
 - MongoDB (for storing quotes)
 
-## Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/quote-generator.git
-   ```
-
-2. Navigate to the project directory:
-   ```bash
-   cd quote-generator
-   ```
-
-3. Install dependencies for both the frontend and backend:
-   ```bash
-   cd backend
-   npm install
-   cd ../frontend
-   npm install
-   ```
-
-4. Start the backend server:
-   ```bash
-   cd backend
-   npm start
-   ```
-
-5. Open the `index.html` file in the `frontend/static/` directory in your browser to use the app.
-
 ## Usage
 
 - Click the **Generate a Quote** button to fetch and display a random quote.
@@ -72,11 +44,9 @@ quote-generator/
 ├── README.md              # Project documentation
 ```
 
-## API Endpoints
+## API Documentation
 
-### Quotes
-- `GET /api/v1/quotes/quote`: Fetch a random quote.
-- `POST /api/v1/quotes/create_quote`: Add a new quote.
+For detailed API documentation, visit: [API Docs](https://eediallo-qoute-server.hosting.codeyourfuture.io/api-docs/)
 
 ## Note on Authentication
 
