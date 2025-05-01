@@ -4,8 +4,15 @@ import { asyncWrapper } from "../middleware/async.js";
 import { NotFoundError, BadRequestError } from "../errors/index.js";
 
 export function getRandomQuote(quotes) {
-  if(!Array.isArray(quotes)) throw Error("Input must be an array");
-  
+  if (!Array.isArray(quotes)) throw Error("Input must be an array");
+
+  const allObjects = quotes.every(
+    (quote) =>
+      typeof quote === "object" && quote !== null && !Array.isArray(quote)
+  );
+  if (!allObjects)
+    throw Error("All elements in the array must be plain objects");
+
   const index = Math.floor(Math.random() * quotes.length);
   return quotes[index];
 }
@@ -34,7 +41,6 @@ const createQuote = asyncWrapper(async (req, res) => {
   }
   const newQuote = await Quote.create(req.body);
   res.status(201).json({ success: true, newQuote });
-  
 });
 
 const deleteQuote = asyncWrapper(async (req, res) => {
