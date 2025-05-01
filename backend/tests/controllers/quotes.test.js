@@ -45,4 +45,18 @@ it("Should throw an error if each quote does not contain both quote and author p
   );
 });
 
+
+it("Should return a random quote", () => {
+    
+    const quotes = [
+        { quote: "The only limit to our realization of tomorrow is our doubts of today.", author: "Franklin D. Roosevelt" },
+        { quote: "In the middle of every difficulty lies opportunity.", author: "Albert Einstein" },
+        { quote: "Life is what happens when you're busy making other plans.", author: "John Lennon" }
+    ];
+
+    const result = getRandomQuote(quotes);
+
+    expect(quotes).toContainEqual(result);
+});
+
 });
