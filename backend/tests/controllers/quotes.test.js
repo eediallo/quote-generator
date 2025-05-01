@@ -33,4 +33,16 @@ it("Should throw an error if quotes array does not contain plain objects", () =>
     expect(resultFn).toThrowError("All elements in the array must be plain objects");
 });
 
+
+
+it("Should throw an error if each quote does not contain both quote and author properties", () => {
+  const quotes = [{'quote': 'hello', "author": "hadj"}, {'quote': 'hello', "owner": "hadj"}];
+
+  const resultFn = () => getRandomQuote(quotes);
+
+  expect(resultFn).toThrowError(
+    'Each quote must contain both "quote" and "author" properties'
+  );
+});
+
 });
