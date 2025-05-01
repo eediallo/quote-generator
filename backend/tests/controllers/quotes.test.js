@@ -104,4 +104,11 @@ describe("getAllQuotes", () => {
     expect(response.body.quotes).toStrictEqual(mockQuotes);
     expect(findMock).toHaveBeenCalledOnce();
   });
+
+  it(`Should return ${StatusCodes.INTERNAL_SERVER_ERROR} status if there is a server error`, async()=>{
+    findMock.mockRejectedValue(new Error ("Database failure"))
+    const response = await request(app).get("/api/v1/quotes/all")
+
+    expect(response.body.success).toBeFalsy()
+  })
 });
