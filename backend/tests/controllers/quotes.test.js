@@ -24,4 +24,13 @@ describe("getRandomQuote()", () => {
     expect(result).toBeUndefined()
   })
 
+
+it("Should throw an error if quotes array does not contain plain objects", () => {
+    const quotes = ["not an object", 123, null];
+
+    const resultFn = () => getRandomQuote(quotes);
+
+    expect(resultFn).toThrowError("All elements in the array must be plain objects");
+});
+
 });
