@@ -3,7 +3,9 @@ import { quotes } from "../db/quotes.js";
 import { asyncWrapper } from "../middleware/async.js";
 import { NotFoundError, BadRequestError } from "../errors/index.js";
 
-function randomQuote(quotes) {
+export function getRandomQuote(quotes) {
+  if(!Array.isArray(quotes)) throw Error("Input must be an array");
+  
   const index = Math.floor(Math.random() * quotes.length);
   return quotes[index];
 }
@@ -20,7 +22,7 @@ const getQuote = asyncWrapper(async (req, res) => {
   if (quotesData.length === 0) {
     throw new NotFoundError("No quotes found. Please add a quote");
   }
-  const quote = randomQuote(quotesData);
+  const quote = getRandomQuote(quotesData);
   res.status(200).json({ success: true, quote });
 });
 
