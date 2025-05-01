@@ -6,12 +6,19 @@ import { NotFoundError, BadRequestError } from "../errors/index.js";
 export function getRandomQuote(quotes) {
   if (!Array.isArray(quotes)) throw Error("Input must be an array");
 
-  const allObjects = quotes.every(
+  const allQuotes = quotes.every(
     (quote) =>
       typeof quote === "object" && quote !== null && !Array.isArray(quote)
   );
-  if (!allObjects)
+  if (!allQuotes)
     throw Error("All elements in the array must be plain objects");
+
+
+  for (const quote of quotes) {
+    if (!quote.hasOwnProperty('quote') || !quote.hasOwnProperty('author')) {
+      throw new Error('Each quote must contain both "quote" and "author" properties');
+    }
+  }
 
   const index = Math.floor(Math.random() * quotes.length);
   return quotes[index];
