@@ -14,5 +14,14 @@ describe("getRandomQuote()", () => {
     expect(resultFn).toThrowError("Input must be an array");
     expect(resultFn1).toThrowError("Input must be an array");
   });
-  
+
+
+  it('Should yield undefined if no quote is found', ()=>{
+    const quotes = []
+
+    const result = getRandomQuote(quotes)
+
+    expect(result).toBeUndefined()
+  })
+
 });
