@@ -63,7 +63,6 @@ app.use("/api/v1/auth", authRouter);
 // pars error handler
 app.use(errorHandler);
 app.use(notFound);
-
 const start = async () => {
   try {
     await connectDB(process.env.MONGO_URI);
@@ -76,3 +75,5 @@ const start = async () => {
 };
 
 start();
+
+export default app;
