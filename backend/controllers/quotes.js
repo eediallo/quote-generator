@@ -2,6 +2,7 @@ import { Quote } from "../models/quotes.js";
 import { quotes } from "../db/quotes.js";
 import { asyncWrapper } from "../middleware/async.js";
 import { NotFoundError, BadRequestError } from "../errors/index.js";
+import { StatusCodes } from "http-status-codes";
 
 export function getRandomQuote(quotes) {
   if (!Array.isArray(quotes)) throw Error("Input must be an array");
@@ -28,7 +29,7 @@ export function getRandomQuote(quotes) {
 // get all quotes
 const getAllQuotes = asyncWrapper(async (req, res) => {
   const quotes = await Quote.find({});
-  res.status(200).json({ success: true, quotes });
+  res.status(StatusCodes.OK).json({ success: true, quotes });
 });
 
 // get single random quote
@@ -41,7 +42,7 @@ const getQuote = asyncWrapper(async (req, res) => {
     throw new NotFoundError(`No quotes found. Please add a quote.`);
   }
 
-  res.status(200).json({ success: true, quote });
+  res.status(StatusCodes.OK).json({ success: true, quote });
 });
 
 // create a quote
@@ -51,7 +52,7 @@ const createQuote = asyncWrapper(async (req, res) => {
     throw new BadRequestError("Please provide a quote and an author.");
   }
   const newQuote = await Quote.create(req.body);
-  res.status(201).json({ success: true, newQuote });
+  res.status(StatusCodes.CREATED).json({ success: true, newQuote });
 });
 
 const deleteQuote = asyncWrapper(async (req, res) => {
@@ -60,7 +61,7 @@ const deleteQuote = asyncWrapper(async (req, res) => {
   if (!quote) {
     throw new NotFoundError(`No quote with id : ${id}`);
   }
-  res.status(200).json({ success: true, quote });
+  res.status(StatusCodes.OK).json({ success: true, quote });
 });
 
 export { createQuote, getQuote, getAllQuotes, deleteQuote };
