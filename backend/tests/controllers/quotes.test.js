@@ -96,7 +96,7 @@ describe("getAllQuotes", () => {
     ];
 
     findMock.mockResolvedValue(mockQuotes);
-    
+
     const response = await request(app).get("/api/v1/quotes/all");
 
     expect(response.status).toBe(StatusCodes.OK);
@@ -105,10 +105,55 @@ describe("getAllQuotes", () => {
     expect(findMock).toHaveBeenCalledOnce();
   });
 
-  it(`Should return ${StatusCodes.INTERNAL_SERVER_ERROR} status if there is a server error`, async()=>{
-    findMock.mockRejectedValue(new Error ("Database failure"))
-    const response = await request(app).get("/api/v1/quotes/all")
+  it(`Should return ${StatusCodes.INTERNAL_SERVER_ERROR} status if there is a server error`, async () => {
+    findMock.mockRejectedValue(new Error("Database failure"));
+    const response = await request(app).get("/api/v1/quotes/all");
 
-    expect(response.body.success).toBeFalsy()
-  })
+    expect(response.body.success).toBeFalsy();
+  });
+});
+
+describe("getQuote()", () => {
+  let findMock;
+
+  beforeEach(() => {
+    findMock = vi.spyOn(Quote, "find");
+  });
+
+  afterEach(() => {
+    findMock.mockRestore();
+  });
+
+  it(`Should return a random quote with ${StatusCodes.OK} status`, async () => {
+    const mockQuotes = [
+      {
+        quote: "Be yourself; everyone else is already taken.",
+        author: "Oscar Wilde",
+      },
+      {
+        quote: "In the middle of every difficulty lies opportunity.",
+        author: "Albert Einstein",
+      },
+    ];
+
+    findMock.mockResolvedValue(mockQuotes);
+
+    const response = await request(app).get("/api/v1/quotes/quote");
+
+    expect(response.status).toBe(StatusCodes.OK);
+    expect(response.body.success).toBe(true);
+    expect(mockQuotes).toContainEqual(response.body.quote);
+    expect(findMock).toHaveBeenCalledOnce();
+  });
+
+  it(`Should return ${StatusCodes.NOT_FOUND} status if no quotes are found`, async () => {
+    findMock.mockResolvedValue([]);
+
+    const response = await request(app).get("/api/v1/quotes/quote");
+
+    expect(response.status).toBe(StatusCodes.NOT_FOUND);
+    expect(response.body.success).toBe(false);
+    expect(findMock).toHaveBeenCalledOnce();
+  });
+
 });
