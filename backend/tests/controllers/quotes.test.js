@@ -72,7 +72,7 @@ describe("getRandomQuote()", () => {
   });
 });
 
-describe("getAllQuotes", () => {
+describe("getAllQuotes()", () => {
   let findMock;
 
   beforeEach(() => {
@@ -155,5 +155,33 @@ describe("getQuote()", () => {
     expect(response.body.success).toBe(false);
     expect(findMock).toHaveBeenCalledOnce();
   });
+});
 
+describe("createQuote()", () => {
+  let createMock;
+
+  beforeEach(() => {
+    createMock = vi.spyOn(Quote, "create");
+  });
+
+  afterEach(() => {
+    createMock.mockRestore();
+  });
+
+  it(`should return new quote with ${StatusCodes.CREATED} status `, async () => {
+    const quote = {
+      quote: "In the middle of every difficulty lies opportunity.",
+      author: "Albert Einstein",
+    };
+
+    createMock.mockResolvedValue(quote);
+
+    const response = await request(app)
+      .post("/api/v1/quotes/create_quote")
+      .send(quote);
+
+    expect(response.status).toBe(StatusCodes.CREATED);
+    expect(response.body.newQuote).toStrictEqual(quote);
+    expect(response.body.success).toBe(true);
+  });
 });
