@@ -52,7 +52,7 @@ it("should return a 400 status if required fields are missing", async () => {
     expect(response.body).toHaveProperty("msg", "Please provide all required fields.");
 });
 
-  it("should handle errors during user creation", async () => {
+  it(`should handle ${StatusCodes.INTERNAL_SERVER_ERROR} errors during user creation`, async () => {
     createMock.mockRejectedValue(new Error("Database error"));
 
     const user = {
