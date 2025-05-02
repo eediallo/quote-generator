@@ -3,13 +3,13 @@ import cors from "cors";
 import { quoteRouter } from "./routes/quote.js";
 import { connectDB } from "./db/connect.js";
 import dotenv from "dotenv";
+dotenv.config();
 import { notFound } from "./middleware/notFound.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 import { authRouter } from "./routes/user.js";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUiExpress from "swagger-ui-express";
 import { StatusCodes } from "http-status-codes";
-dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
