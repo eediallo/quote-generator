@@ -35,8 +35,6 @@ generateQuoteBtn.addEventListener("click", async (e) => {
   quoteEl.textContent = `${quote} - ${author}`;
 });
 
-// On page load, display one quote
-window.onload = displayQuote;
 
 // Helpers
 async function fetchQuote() {
@@ -103,3 +101,6 @@ async function displayQuote() {
   const { quote, author } = data;
   quoteEl.textContent = `${quote} - ${author}`;
 }
+
+// On page load, display one quote
+window.onload = displayQuote;
