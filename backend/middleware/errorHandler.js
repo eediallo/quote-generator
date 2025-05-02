@@ -5,5 +5,5 @@ export const errorHandler = (err, req, res, next) => {
       .status(err.statusCode)
       .json({ success: false, msg: err.message });
   }
-  return res.status(500).send("Something went wrong try again later");
+  return res.status(500).send({ msg: "Something went wrong, please try again later" });
 };
