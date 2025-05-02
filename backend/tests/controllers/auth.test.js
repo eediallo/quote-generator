@@ -39,7 +39,7 @@ describe("register()", () => {
     expect(response.body).toHaveProperty("token", token);
   });
 
-  it("should return a 400 status if required fields are missing", async () => {
+  it(`should return a ${StatusCodes.BAD_REQUEST} status if required fields are missing`, async () => {
     const user = {
       email: "daniel@gmail.com",
     };
@@ -87,57 +87,57 @@ describe("login()", () => {
     createMock.mockRestore();
   });
 
-it(`should login a user and return a ${StatusCodes.OK} status`, async () => {
+  it(`should login a user and return a ${StatusCodes.OK} status`, async () => {
     const userDetails = {
-        email: "daniel@gmail.com",
-        password: "Secret98",
+      email: "daniel@gmail.com",
+      password: "Secret98",
     };
 
     const token = "mock-jwt-token";
     createMock.mockResolvedValue({
-        ...userDetails,
-        comparePassword: vi.fn().mockResolvedValue(true),
-        createJWT: vi.fn().mockResolvedValue(token),
+      ...userDetails,
+      comparePassword: vi.fn().mockResolvedValue(true),
+      createJWT: vi.fn().mockResolvedValue(token),
     });
 
     const response = await request(app)
-        .post("/api/v1/auth/login")
-        .send(userDetails);
+      .post("/api/v1/auth/login")
+      .send(userDetails);
 
     expect(response.status).toBe(StatusCodes.OK);
     expect(response.body).toHaveProperty("user");
     expect(response.body).toHaveProperty("token", token);
-});
+  });
 
-it("should return a 400 status if email or password is missing", async () => {
+  it("should return a 400 status if email or password is missing", async () => {
     const userDetails = {
-        email: "daniel@gmail.com",
+      email: "daniel@gmail.com",
     };
 
     const response = await request(app)
-        .post("/api/v1/auth/login")
-        .send(userDetails);
+      .post("/api/v1/auth/login")
+      .send(userDetails);
 
     expect(response.status).toBe(StatusCodes.BAD_REQUEST);
     expect(response.body).toHaveProperty(
-        "msg",
-        "Please provide email and password"
+      "msg",
+      "Please provide email and password"
     );
-});
+  });
 
-it("should return a 401 status if credentials are invalid", async () => {
+  it("should return a 401 status if credentials are invalid", async () => {
     createMock.mockResolvedValue(null);
 
     const userDetails = {
-        email: "daniel@gmail.com",
-        password: "WrongPassword",
+      email: "daniel@gmail.com",
+      password: "WrongPassword",
     };
 
     const response = await request(app)
-        .post("/api/v1/auth/login")
-        .send(userDetails);
+      .post("/api/v1/auth/login")
+      .send(userDetails);
 
     expect(response.status).toBe(StatusCodes.UNAUTHORIZED);
     expect(response.body).toHaveProperty("msg", "Invalid credentials");
-});
+  });
 });
