@@ -1,0 +1,13 @@
+{
+    "name": "quote-generator-frontend",
+    "description": "allows users to generate random quotes and their own",
+    "authors": "eediallo",
+    "version": "1.0.0",
+    "main": "pathToMain",
+    "dependencies": {
+        "http-server": "^14.1.1"
+    },
+    "scripts": {
+        "start": "http-server"
+    }
+}
