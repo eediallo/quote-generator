@@ -184,4 +184,26 @@ describe("createQuote()", () => {
     expect(response.body.newQuote).toStrictEqual(quote);
     expect(response.body.success).toBe(true);
   });
+  
+it(`should return a ${StatusCodes.BAD_REQUEST} status if neither quote nor author is provided`, async () => {
+  const quote1 = {
+    quote: "",
+    author: "Albert Einstein",
+  };
+
+  const quote2 = {
+    quote: "In the middle of every difficulty lies opportunity.",
+    author: "",
+  };
+
+  // Test for quote1
+  createMock.mockRejectedValue(quote1);
+  let response = await request(app).post('/api/v1/quotes/create_quote').send(quote1);
+  expect(response.status).toBe(StatusCodes.BAD_REQUEST);
+
+  // Test for quote2
+  createMock.mockRejectedValue(quote2);
+  response = await request(app).post('/api/v1/quotes/create_quote').send(quote2);
+  expect(response.status).toBe(StatusCodes.BAD_REQUEST);
+});
 });
