@@ -13,10 +13,11 @@ export function getRandomQuote(quotes) {
   if (!allQuotes)
     throw Error("All elements in the array must be plain objects");
 
-
   for (const quote of quotes) {
-    if (!quote.hasOwnProperty('quote') || !quote.hasOwnProperty('author')) {
-      throw new Error('Each quote must contain both "quote" and "author" properties');
+    if (!quote.hasOwnProperty("quote") || !quote.hasOwnProperty("author")) {
+      throw new Error(
+        'Each quote must contain both "quote" and "author" properties'
+      );
     }
   }
 
@@ -32,11 +33,14 @@ const getAllQuotes = asyncWrapper(async (req, res) => {
 
 // get single random quote
 const getQuote = asyncWrapper(async (req, res) => {
-  const quotesData = await quotes();
-  if (quotesData.length === 0) {
-    throw new NotFoundError("No quotes found. Please add a quote");
+  const quotes = await Quote.find({});
+
+  const quote = getRandomQuote(quotes);
+
+  if (!quote) {
+    throw new NotFoundError(`No quotes found. Please add a quote.`);
   }
-  const quote = getRandomQuote(quotesData);
+
   res.status(200).json({ success: true, quote });
 });
 
